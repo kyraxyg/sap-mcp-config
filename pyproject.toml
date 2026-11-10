@@ -23,7 +23,9 @@ dependencies = [
     "python-dotenv>=1",
     "PyYAML>=6",
 ]
-dynamic = ["readme", "version"]
+dynamic = ["readme"]
+# Fork: pinned instead of derived from git tags (tags cannot be pushed here).
+version = "1.1.1.post1"
 
 [project.urls]
 Changelog = "https://github.com/Hochfrequenz/sap-mcp-config/releases"
@@ -74,21 +76,12 @@ dev = [
 default-groups = []
 
 [build-system]
-requires = ["hatchling>=1.8.0", "hatch-vcs", "hatch-fancy-pypi-readme"]
+requires = ["hatchling>=1.8.0", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/markdown"
 fragments = [{ path = "README.md" }]
-
-[tool.hatch.version]
-source = "vcs"
-
-[tool.hatch.build.hooks.vcs]
-version-file = "src/_sap_mcp_config_version.py"
-template = '''
-version = "{version}"
-'''
 
 [tool.hatch.build.targets.sdist]
 exclude = ["/unittests"]
