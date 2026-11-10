@@ -313,9 +313,9 @@ class Config(BaseModel):
                 pwd == ""
             ):
                 errs.append(f"system {_quote(name)}: must have both user and password, or neither (for OAuth2)")
-            if not report.unusable(name, "language") and sys.language not in ("DE", "EN"):
+            if not report.unusable(name, "language") and sys.language not in ("DE", "EN", "TR"):
                 described = report.describe(name, "language", sys.language)
-                errs.append(f'system {_quote(name)}: language must be "DE" or "EN", got {described}')
+                errs.append(f'system {_quote(name)}: language must be "DE", "EN" or "TR", got {described}')
         if errs:
             raise ValueError("invalid configuration:\n  - " + "\n  - ".join(errs))
         return self

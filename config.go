@@ -347,8 +347,8 @@ func (c *Config) validate(report placeholderReport) error {
 			// Report the normalized value, matching Python, whose BeforeValidator has
 			// already uppercased the field by the time it reaches validation.
 			lang := strings.ToUpper(sys.Language)
-			if lang != "DE" && lang != "EN" {
-				errs = append(errs, fmt.Sprintf("system %q: language must be \"DE\" or \"EN\", got %s",
+			if lang != "DE" && lang != "EN" && lang != "TR" {
+				errs = append(errs, fmt.Sprintf("system %q: language must be \"DE\", \"EN\" or \"TR\", got %s",
 					name, report.describe(name, "language", lang)))
 			}
 		}

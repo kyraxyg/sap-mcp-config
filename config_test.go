@@ -120,7 +120,7 @@ func TestParseValidation(t *testing.T) {
 		{
 			name:    "invalid language",
 			json:    `{"default_system":"a","systems":{"a":{"host":"https://h","user":"u","password":"p","language":"FR"}}}`,
-			wantErr: `language must be "DE" or "EN"`,
+			wantErr: `language must be "DE", "EN" or "TR"`,
 		},
 	}
 
@@ -450,7 +450,7 @@ func TestInvalidLanguageReportsNormalizedValue(t *testing.T) {
 	data := `{"default_system":"a","systems":{"a":{"host":"https://h","user":"u","password":"p","language":"fr"}}}`
 	_, err := sapmcpconfig.Parse([]byte(data))
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), `language must be "DE" or "EN", got "FR"`)
+	assert.Contains(t, err.Error(), `language must be "DE", "EN" or "TR", got "FR"`)
 }
 
 // TestErrorQuotingEscapesSpecialCharacters pins that a quote or newline in a

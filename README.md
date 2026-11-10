@@ -118,7 +118,7 @@ systems:
 | `client` | string | no | `""` | SAP client/mandant, must be exactly 3 digits (e.g. `"100"`) |
 | `user` | string | conditional | `""` | SAP username (omit for OAuth2) |
 | `password` | string | conditional | `""` | SAP password (omit for OAuth2) |
-| `language` | string | no | `"EN"` | Login language: `"DE"` or `"EN"` |
+| `language` | string | no | `"EN"` | Login language: `"DE"`, `"EN"` or `"TR"` |
 | `tls_skip_verify` | bool | no | `false` | Skip TLS certificate verification |
 | `oauth2_client_id` | string | no | `""` | OAuth2 client ID for token-based auth |
 
@@ -127,7 +127,7 @@ systems:
 - `default_system` must reference an existing system key
 - `host` is required and must start with `http://` or `https://`
 - `client`, if set, must be exactly 3 digits
-- `language`, if set, must be `"DE"` or `"EN"`
+- `language`, if set, must be `"DE"`, `"EN"` or `"TR"`
 - Either both `user` and `password` must be set, or neither (for OAuth2)
 
 ### Keeping secrets out of the config file

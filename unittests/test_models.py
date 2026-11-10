@@ -183,7 +183,7 @@ class TestStandaloneSAPSystem:
     def test_unknown_language_deferred_to_config(self) -> None:
         """Validating here would abort Config's model validator and hide every other error."""
         assert SAPSystem(host="https://x", language="fr").language == "FR"
-        with pytest.raises(ValidationError, match='language must be "DE" or "EN"'):
+        with pytest.raises(ValidationError, match='language must be "DE", "EN" or "TR"'):
             parse('{"default_system":"a","systems":{"a":{"host":"https://h","language":"fr"}}}')
 
     def test_config_collects_language_with_other_errors(self) -> None:
@@ -195,7 +195,7 @@ class TestStandaloneSAPSystem:
         message = exc_info.value.errors()[0]["msg"]
         assert "host must start with http" in message
         assert "client must be a 3-digit string" in message
-        assert 'language must be "DE" or "EN"' in message
+        assert 'language must be "DE", "EN" or "TR"' in message
 
 
 class TestLoadYAMLFixture:
@@ -704,3 +704,10 @@ class TestExtensibility:
         assert sys.custom_timeout == 60
         assert sys.host == "https://sap:44300"
         assert sys.password.get_secret_value() == "p"
+
+
+def test_turkish_language_is_accepted() -> None:
+    from sap_mcp_config import parse  # noqa: PLC0415
+
+    cfg = parse('{"default_system": "s", "systems": {"s": {"host": "https://x", "language": "tr"}}}')
+    assert cfg.systems["s"].language == "TR"
